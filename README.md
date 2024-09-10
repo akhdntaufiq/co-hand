@@ -3,48 +3,48 @@
 ###### by Akhdan Taufiq Syofyan | PBP-D | 2306152475
 ##### 🔗WEB LINK : http://akhdan-taufiq-cohand.pbp.cs.ui.ac.id/
 
-### 🖋Jawaban Tugas 2
-##### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
-1. Membuat direktori lokal dengan nama "co-hand" untuk proyek git, lalu konfigurasi git pada direktori tersebut
+## 🖋Jawaban Tugas 2
+### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
+1. Membuat direktori lokal dengan nama "co-hand" untuk proyek git, lalu konfigurasi git pada direktori tersebut.
    ```
    git init
    git config --global user.name "<NAME>"
    git config --global user.email "<EMAIL>"
    ```
-2. Kemudian, saya membuat repositori di github dengan nama "co-hand"
-3. Setelah direktori lokal dan repositori github dibuat, saya akan menghubungkan keduanya dengan cara melakukan hal berikut di terminal direktori lokal (NOTES: default branch saya adalah master)
+2. Kemudian, saya membuat repositori di github dengan nama "co-hand".
+3. Setelah direktori lokal dan repositori github dibuat, saya akan menghubungkan keduanya dengan cara melakukan hal berikut di terminal direktori lokal. **(NOTES: default branch saya adalah master)**
    ```
    git branch -M master
    git remote add origin <URL REPO>
    ```
-4. Untuk mengecek apakah sudah atau belumnya terhubung, saya membuat file README.md di direktori lokal. Lalu, saya menjalankan command berikut di dalam terminal direktori lokal.
+4. Untuk mengecek apakah sudah atau belumnya terhubung, saya membuat file `README.md` di direktori lokal. Lalu, saya menjalankan command berikut di dalam terminal direktori lokal.
    ```
    git add .
    git commit -m "update...."
    git push origin master
    ```
-5. Setelah melakukan perintah tersebut, file README.md seharusnya sudah berada di dalam repositori github "co-hand"
-6. Kemudian, saya lanjut mengenai instalasi django. hal pertama yang dolakukan adalah membuat virtual environment di dalam direktori lokal dan mengaktifkannya dengan cara berikut. (NOTES: Saya menggunakan Windows)
+5. Setelah melakukan perintah tersebut, file `README.md` seharusnya sudah berada di dalam repositori github "co-hand".
+6. Kemudian, saya lanjut mengenai instalasi django. hal pertama yang dolakukan adalah membuat virtual environment di dalam direktori lokal dan mengaktifkannya dengan cara berikut. **(NOTES: Saya menggunakan Windows)**
    ```
    python -m venv env
    env\Scripts\activate
    ```
-7. Pada direkori lokal "co-hand", saya membuat file "requirements.txt" dan menambahkan beberapa dependencies
-8. Lalu, install dependencies tersebut dan dilanjutkan dengan membuat proyek django dengan nama "co_hand"
+7. Pada direkori lokal "co-hand", saya membuat file `requirements.txt` dan menambahkan beberapa dependencies.
+8. Lalu, install dependencies tersebut dan dilanjutkan dengan membuat proyek django dengan nama "co_hand".
    ```
    pip install -r requirements.txt
    django-admin startproject co_hand .
    ```
-9. Setelah menjalankan langkah diatas, saya melihat terdapat beberapa file serta folder baru. Kemudian, saya mencari settings.py dan menambahkan kedua string berikut ke dalam ALLOWED_HOST.
+9. Setelah menjalankan langkah diatas, saya melihat terdapat beberapa file serta folder baru. Kemudian, saya mencari `settings.py` dan menambahkan kedua string berikut ke dalam `ALLOWED_HOST`.
     ```
     "localhost", "127.0.0.1"
     ```
-10. Kemudian, saya membuat aplikasi baru dengan nama "main"
+10. Kemudian, saya membuat aplikasi baru dengan nama `main`.</p>
     ```
     python manage.py startapp main
     ```
-11. Setelah itu saya menambahkan 'main' pada INSTALLED_APPS di settings.py direktori co_hand
-12. Kemudian, saya membuat direktori baru di aplikasi main dengan nama "templates" dan membuat file baru di dalamnya dengan nama "main.html". Lalu, saya mengisi main.html dengan kode berikut.
+11. Setelah itu saya menambahkan `main` pada `INSTALLED_APPS` di `settings.py` direktori co_hand.
+12. Kemudian, saya membuat direktori baru di aplikasi main dengan nama `templates` dan membuat file baru di dalamnya dengan nama `main.html`. Lalu, saya mengisi `main.html` dengan kode berikut.
     ```
     <!DOCTYPE html>
     <html lang="en">
@@ -60,7 +60,7 @@
     </body>
     </html>
     ```
-13. Lalu, saya mengisi models.py pada aplikasi main dengan kode berikut.
+13. Lalu, saya mengisi `models.py` pada aplikasi main dengan kode berikut.
     ```
     from django.db import models
 
@@ -78,7 +78,7 @@
     python manage.py makemigrations
     python manage.py migrate
     ```
-15. Kemudian, saya menghubungkan view dengan template yang sebelumnya sudah dibuat dengan cara menambahkan line berikut pada views.py di dalam aplikasi main.
+15. Kemudian, saya menghubungkan view dengan template yang sebelumnya sudah dibuat dengan cara menambahkan line berikut pada `views.py` di dalam aplikasi main.
     ```
     from django.shortcuts import render
 
@@ -92,7 +92,7 @@
 
     return render(request, "main.html", context)
     ```
-16. Setelah menguhubungkan views dan templates, saya mengonfigurasi routing URL dengan cara mengisi berkas urls.py pada direktori luar dengan kode berikut.
+16. Setelah menguhubungkan views dan templates, saya mengonfigurasi routing URL dengan cara mengisi berkas `urls.py` pada direktori luar dengan kode berikut.
     ```
     from django.contrib import admin
     from django.urls import path, include
@@ -102,176 +102,48 @@
         path('', include('main.urls')),
     ]
     ```
-17. Kemudian, saya menambahkan berkas .gitigoner untuk menentukan apa saja berkas yang perlu diabaikan git. Berikut adalah isi dari berkas .gitignore.
-    ```
-    # Django
-    *.log
-    *.pot
-    *.pyc
-    __pycache__
-    db.sqlite3
-    media
-    
-    # Backup files
-    *.bak
-    
-    # If you are using PyCharm
-    # User-specific stuff
-    .idea/**/workspace.xml
-    .idea/**/tasks.xml
-    .idea/**/usage.statistics.xml
-    .idea/**/dictionaries
-    .idea/**/shelf
-    
-    # AWS User-specific
-    .idea/**/aws.xml
-    
-    # Generated files
-    .idea/**/contentModel.xml
-    .DS_Store
-    
-    # Sensitive or high-churn files
-    .idea/**/dataSources/
-    .idea/**/dataSources.ids
-    .idea/**/dataSources.local.xml
-    .idea/**/sqlDataSources.xml
-    .idea/**/dynamic.xml
-    .idea/**/uiDesigner.xml
-    .idea/**/dbnavigator.xml
-    
-    # Gradle
-    .idea/**/gradle.xml
-    .idea/**/libraries
-    
-    # File-based project format
-    *.iws
-    
-    # IntelliJ
-    out/
-    
-    # JIRA plugin
-    atlassian-ide-plugin.xml
-    
-    # Python
-    *.py[cod]
-    *$py.class
-    
-    # Distribution / packaging
-    .Python build/
-    develop-eggs/
-    dist/
-    downloads/
-    eggs/
-    .eggs/
-    lib/
-    lib64/
-    parts/
-    sdist/
-    var/
-    wheels/
-    *.egg-info/
-    .installed.cfg
-    *.egg
-    *.manifest
-    *.spec
-    
-    # Installer logs
-    pip-log.txt
-    pip-delete-this-directory.txt
-    
-    # Unit test / coverage reports
-    htmlcov/
-    .tox/
-    .coverage
-    .coverage.*
-    .cache
-    .pytest_cache/
-    nosetests.xml
-    coverage.xml
-    *.cover
-    .hypothesis/
-    
-    # Jupyter Notebook
-    .ipynb_checkpoints
-    
-    # pyenv
-    .python-version
-    
-    # celery
-    celerybeat-schedule.*
-    
-    # SageMath parsed files
-    *.sage.py
-    
-    # Environments
-    .env
-    .venv
-    env/
-    venv/
-    ENV/
-    env.bak/
-    venv.bak/
-    
-    # mkdocs documentation
-    /site
-    
-    # mypy
-    .mypy_cache/
-    
-    # Sublime Text
-    *.tmlanguage.cache
-    *.tmPreferences.cache
-    *.stTheme.cache
-    *.sublime-workspace
-    *.sublime-project
-    
-    # sftp configuration file
-    sftp-config.json
-    
-    # Package control specific files Package
-    Control.last-run
-    Control.ca-list
-    Control.ca-bundle
-    Control.system-ca-bundle
-    GitHub.sublime-settings
-    
-    # Visual Studio Code
-    .vscode/*
-    !.vscode/settings.json
-    !.vscode/tasks.json
-    !.vscode/launch.json
-    !.vscode/extensions.json
-    .history
-    ```
-17. Langkah berikutnya yang saya lakukan adalah membuat akun pada PWS yang nantinya akan digunakan untuk men-deploy project django yang dibuat.
-18. Lalu, saya membuat project baru pada PWS dan mendapatkan Project Credentials dan Project Command.
-19. Kemudian, saya kembali ke settings.py dan menambahkan url deployment pada list ALLOWED_HOST.
+17. Kemudian, saya menambahkan berkas `.gitigoner` untuk menentukan apa saja berkas yang perlu diabaikan git.
+18. Langkah berikutnya yang saya lakukan adalah membuat akun pada PWS yang nantinya akan digunakan untuk men-deploy project django yang dibuat.
+19. Lalu, saya membuat project baru pada PWS dan mendapatkan Project Credentials dan Project Command.
+20. Kemudian, saya kembali ke `settings.py` dan menambahkan url deployment pada list `ALLOWED_HOST`.
     ```
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", "akhdan-taufiq-cohand.pbp.cs.ui.ac.id"]
     ```
-20. Setelah semua langkah project django (selain deployment) dan pembuatan project PWS selesai, saya melakukan push ke dalam repo github dengan melakukan command berikut pada direktori lokal
+21. Setelah semua langkah project django (selain deployment) dan pembuatan project PWS selesai, saya melakukan push ke dalam repo github dengan melakukan command berikut pada direktori lokal.
     ```
     git add .
     git commit -m "finish...."
     git push origin master
     ```
-21. Langkah akhir yang saya lakukan adalah menjalankan command berikut.
+22. Langkah akhir yang saya lakukan adalah menjalankan command berikut.
     ```
     git remote add pws http://pbp.cs.ui.ac.id/akhdan.taufiq/cohand
     git branch -M master
     git push pws master
     ```
-22. Jika saya suatu saat ingin memperbarui web tersebut, maka saya dapat menjalankan command berikut pada terminal direktori lokal co-hand.
+23. Jika saya suatu saat ingin memperbarui web tersebut, maka saya dapat menjalankan command berikut pada terminal direktori lokal co-hand.
     ```
     git branch -M main
     git push pws main:master
     ```
-23. Dengan mengikuti langkah-langkah diatas, maka deployment project django saya pun berhasil.
-<br></br>
-##### 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html!
+24. Dengan mengikuti langkah-langkah diatas, maka deployment project django saya pun selesai.
+---
 
-##### 3. Jelaskan fungsi git dalam pengembangan perangkat lunak!
+### 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html!
 
-##### 4. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
+---
 
-##### 5. Mengapa model pada Django disebut sebagai ORM?
+### 3. Jelaskan fungsi git dalam pengembangan perangkat lunak!
+Git dalam pengembangan perangkat lunak sangat menguntungkan developer karena membantu melacak perubahan kode, menggabungkan (merge) perubahan, membuat percabangan (branch) untuk penambahan fitur, atau bahkan memungkinkan untuk kembali ke versi sebelumnya jika diperlukan. Hal ini saat dibutuhkan dalam sebuah project yang memerlukan kolaborasi banyak developer dalam satu waktu sehingga meningkatkan efisiensi waktu.
+
+---
+
+
+### 4. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
+Framework Django seringkali dijadikan permulaan pembelajaran dikarenakan menggunakan bahasa Python yang mudah dipahami sehingga membuat pemula dapat lebih fokus dalam pemrograman web. Selain itu, arsitektur MVT (Model-View-Template) pada Django yang membuat struktur aplikasi yang terorganisir, ekosistem yang matang, serta dokumentasi yang jelas membuat django menjadi salah satu pilihan yang tepat untuk permulaan pembelajaran *software development*.
+
+---
+
+### 5. Mengapa model pada Django disebut sebagai ORM?
+Model Django disebut ORM (Object-Relational Mapping) karena menghubungi objek Python dengan database relasional. ORM memungkinkan developer berinteraksi dengan database menggunakan kode Python, tanpa perlu menulis/menggunakan SQL secara langsung.
+
