@@ -4,7 +4,7 @@
 ##### 🔗WEB LINK : http://akhdan-taufiq-cohand.pbp.cs.ui.ac.id/
 
 ## 🖋Jawaban Tugas 2
-### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
+### 1️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
 1. Membuat direktori lokal dengan nama "co-hand" untuk proyek git, lalu konfigurasi git pada direktori tersebut.
    ```
    git init
@@ -129,21 +129,23 @@
 24. Dengan mengikuti langkah-langkah diatas, maka deployment project django saya pun selesai.
 ---
 
-### 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html!
+### 2️⃣ Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html!
+<img src="tugas2_2.png" style="width:50%; height:auto;">
 
 ---
 
-### 3. Jelaskan fungsi git dalam pengembangan perangkat lunak!
+
+### 3️⃣ Jelaskan fungsi git dalam pengembangan perangkat lunak!
 Git dalam pengembangan perangkat lunak sangat menguntungkan developer karena membantu melacak perubahan kode, menggabungkan (merge) perubahan, membuat percabangan (branch) untuk penambahan fitur, atau bahkan memungkinkan untuk kembali ke versi sebelumnya jika diperlukan. Hal ini saat dibutuhkan dalam sebuah project yang memerlukan kolaborasi banyak developer dalam satu waktu sehingga meningkatkan efisiensi waktu.
 
 ---
 
 
-### 4. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
-Framework Django seringkali dijadikan permulaan pembelajaran dikarenakan menggunakan bahasa Python yang mudah dipahami sehingga membuat pemula dapat lebih fokus dalam pemrograman web. Selain itu, arsitektur MVT (Model-View-Template) pada Django yang membuat struktur aplikasi yang terorganisir, ekosistem yang matang, serta dokumentasi yang jelas membuat django menjadi salah satu pilihan yang tepat untuk permulaan pembelajaran *software development*.
+### 4️⃣ Mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
+Framework Django seringkali dijadikan permulaan pembelajaran dikarenakan menggunakan bahasa Python yang mudah dipahami sehingga membuat pemula dapat lebih fokus dalam pemrograman web. Selain itu, arsitektur MVT (Model-View-Template) pada Django yang membuat struktur aplikasi yang terorganisir, ekosistem yang matang, serta dokumentasi yang jelas membuat Django menjadi salah satu pilihan yang tepat untuk permulaan pembelajaran *software development*.
 
 ---
 
-### 5. Mengapa model pada Django disebut sebagai ORM?
+### 5️⃣ Mengapa model pada Django disebut sebagai ORM?
 Model Django disebut ORM (Object-Relational Mapping) karena menghubungi objek Python dengan database relasional. ORM memungkinkan developer berinteraksi dengan database menggunakan kode Python, tanpa perlu menulis/menggunakan SQL secara langsung.
 
