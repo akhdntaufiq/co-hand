@@ -130,7 +130,7 @@
 ---
 
 ### 2️⃣ Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html!
-<img src="tugas2_2.png" style="width:50%; height:auto;">
+<img src="public/djangoflow_image.png" style="width:50%; height:auto;">
 
 ---
 
