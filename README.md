@@ -3,8 +3,8 @@
 ###### by Akhdan Taufiq Syofyan | PBP-D | 2306152475
 ##### 🔗WEB LINK : http://akhdan-taufiq-cohand.pbp.cs.ui.ac.id/
 #### Table of Contents
-- [Jawaban Tugas 2: Implementasi Model-View-Template (MVT) pada Django](#🖋-Jawaban-Tugas-2) <br>
-- [Jawaban Tugas 3: Implementasi Form dan Data Delivery pada Django](#🖋-Jawaban-Tugas-3)
+- [Jawaban Tugas 2: Implementasi Model-View-Template (MVT) pada Django](#🖋-jawaban-tugas-2) <br>
+- [Jawaban Tugas 3: Implementasi Form dan Data Delivery pada Django](#🖋-jawaban-tugas-3)
 ## 🖋Jawaban Tugas 2
 ### 1️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
 1. Membuat direktori lokal dengan nama "co-hand" untuk proyek git, lalu konfigurasi git pada direktori tersebut.
