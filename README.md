@@ -2,7 +2,7 @@
 ### <i>Your Online Handmade Shop🛍️</i>
 ###### by Akhdan Taufiq Syofyan | PBP-D | 2306152475
 ##### 🔗WEB LINK : http://akhdan-taufiq-cohand.pbp.cs.ui.ac.id/
-#### Table of Contents
+## Table of Contents
 - [Jawaban Tugas 2: Implementasi Model-View-Template (MVT) pada Django](https://github.com/akhdntaufiq/co-hand?tab=readme-ov-file#jawaban-tugas-2) <br>
 - [Jawaban Tugas 3: Implementasi Form dan Data Delivery pada Django](https://github.com/akhdntaufiq/co-hand?tab=readme-ov-file#jawaban-tugas-3)
 ## 🖋Jawaban Tugas 2
