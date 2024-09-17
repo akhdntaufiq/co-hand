@@ -2,7 +2,9 @@
 ### <i>Your Online Handmade Shop🛍️</i>
 ###### by Akhdan Taufiq Syofyan | PBP-D | 2306152475
 ##### 🔗WEB LINK : http://akhdan-taufiq-cohand.pbp.cs.ui.ac.id/
-
+## Table of Contents
+- [Jawaban Tugas 2: Implementasi Model-View-Template (MVT) pada Django](https://github.com/akhdntaufiq/co-hand?tab=readme-ov-file#jawaban-tugas-2) <br>
+- [Jawaban Tugas 3: Implementasi Form dan Data Delivery pada Django](https://github.com/akhdntaufiq/co-hand?tab=readme-ov-file#jawaban-tugas-3)
 ## 🖋Jawaban Tugas 2
 ### 1️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
 1. Membuat direktori lokal dengan nama "co-hand" untuk proyek git, lalu konfigurasi git pada direktori tersebut.
@@ -149,3 +151,14 @@ Framework Django seringkali dijadikan permulaan pembelajaran dikarenakan menggun
 ### 5️⃣ Mengapa model pada Django disebut sebagai ORM?
 Model Django disebut ORM (Object-Relational Mapping) karena menghubungi objek Python dengan database relasional. ORM memungkinkan developer berinteraksi dengan database menggunakan kode Python, tanpa perlu menulis/menggunakan SQL secara langsung.
 
+## 🖋Jawaban Tugas 3
+ ### 1️⃣ Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+ ---
+ ### 2️⃣ Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+ ---
+ ### 3️⃣ Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+ ---
+ ### 4️⃣ Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+ ---
+ ### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+ ---
