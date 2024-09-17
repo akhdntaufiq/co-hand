@@ -153,12 +153,130 @@ Model Django disebut ORM (Object-Relational Mapping) karena menghubungi objek Py
 
 ## 🖋Jawaban Tugas 3
  ### 1️⃣ Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
- ---
+
+---
  ### 2️⃣ Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtensible Markup Language) karena formatnya yang lebih mudah dibaca, yaitu {key:value} seperti data type dictionary pada python. Selain readability yang baik, kinerja parsing JSON juga lebih cepat dikarenakan struktur data yang sederhana serta bisa diubah menjadi objek di JavaScript tanpa memerlukan banyak langkah tambahan. Berbanding terbalik dengan XML yang memerlukan langkah lebih banyak dikarenakan adanya tag dan atribut yang kompleks. Dengan berbagai kemudahan yang diberikan oleh JSON, membuat JSON lebih populer dibandingkan XML.
  ---
  ### 3️⃣ Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+*Method* `is_valid()` pada *form* Django memiliki peran penting dalam aspek integritas dan validasi data. Secara garis besar, method ini akan melakukan validasi menyeluruh terhadap setiap *field*. Jika terdapat kesalahan dalam proses ini, *method* ini akan me-*return* nilai *False*. Namun, jika semua validasi berhasil dilewati, maka *method* akan melakukan validasi data ke dalam atribut `cleaned_data` dari *form* dan me-*return* nilai *True*.
+
  ---
  ### 4️⃣ Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+`csrf_token` pada Django dibutuhkan untuk melindungi web dari serangan Cross-Site Request Forgery (CSRF). Jika kita tidak menyertakan CSRF token dalam form Django, maka permintaan POST bisa berasal dari site yang tidak sah, atau bahkan bisa saja berbahaya. Pada implementasinya, Django akan menyisipkan token ke dalam form HTML menggunakan tag template dimana tag ini akan menghasilkan input tersembunyi dengan nilai token yang unik. Token yang di-generate ini akan selalu disertakan dalam data request sehingga di saat ada permintaan POST dari form, token akan diekstrak dan dibandingkan dengan token yang disimpan di session user. Berbagai proses ini jika dilewatkan, akan memudahkan penyerang karena dapat melakukan POST request ke server tanpa sepengetahuan user.
+
  ---
  ### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+ - **Membuat input form untuk menambahkan objek model pada app sebelumnya.**
+   1. Membuat berkas `forms.py ` pada direktori main.
+      ```
+      from django.forms import ModelForm
+      from main.models import Product
+
+      class ProductEntryForm(ModelForm):
+         class Meta:
+            model = Product
+            fields = ["name", "price", "description"]
+      ```
+   2. Menambahkan import redirect pada `views.py ` agar setelah user mengisi form langsung balik ke halaman utama serta menambahkan method untuk membuat produk.
+      ```
+      from django.shortcuts import render, redirect
+      ```
+      ```
+      def create_product(request):
+         form = ProductEntryForm(request.POST or None)
+
+         if form.is_valid() and request.method == "POST":
+            form.save()
+            return redirect('main:show_main')
+
+         context = {'form': form}
+         return render(request, "create_product.html", context)
+      ```
+   3. Menambahkan line berikut pada funngsi `show_main` pada `views.py` untuk mengambil seluruh produk yang di tersimpan dalam database. (data dalam database berasal dari input form)
+      ```
+      def show_main(request):
+         products = Product.objects.all()
+         context = {
+            'app' : 'Co-Hand',
+            'name': 'Akhdan Taufiq',
+            ' class': 'PBP D',
+            'npm' : '2306152475',
+            'products' : products,
+         }
+
+         return render(request, "main.html", context)
+      ```
+   4. Menambahkan path url menuju page pengisian form
+      ```
+      from django.urls import path
+      from main.views import show_main, create_product
+
+      app_name = 'main'
+
+      urlpatterns = [
+         path('', show_main, name='show_main'),
+         path('create-product', create_product, name='create_product'),
+      ]
+      ```
+   5. Membuat file HTML baru didalam `main/templates` dengan nama `create_product.html` sebagai halaman form dimana object product dibuat. (NOTES: Jangan lupa untuk memasukan {% csrf_token %}
+      ```
+      {% extends 'base.html' %} 
+      {% block content %}
+      <h1>Add Your Product</h1>
+      
+      <form method="POST">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }}
+          <tr>
+            <td></td>
+            <td>
+              <input type="submit" value="Add Product" />
+            </td>
+          </tr>
+        </table>
+      </form>
+      
+      {% endblock %}
+      ```
+ - **Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.**
+   1. Menambahkan import `HttpResponse` dan  `Serializer` pada `views.py` pada direktori `main`
+      ```
+      from django.http import HttpResponse
+      from django.core import serializers
+      ```
+   2. Membuat fungsi berikut di dalam `views.py` pada direktori `main`
+      ```
+      def show_xml(request):
+         data = Product.objects.all()
+         return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+      def show_json(request):
+         data = Product.objects.all()
+         return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+      def show_xml_by_id(request, id):
+         data = Product.objects.filter(pk=id)
+         return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+      def show_json_by_id(request, id):
+         data = Product.objects.filter(pk=id)
+         return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+      ```
+ - **Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.**
+   1. Meng-import fungsi yang dibuat dalam `views.py` ke dalam `urls.py` di dalam direktori `main`
+      ```
+      from main.views import show_main, create_product, show_xml, show_json,show_json_by_id,show_xml_by_id
+      ```
+   2. Manambahkan path URL ke dalam urlpatterns untuk mengakses setiap fungsi yang sudah di import sebelumnya
+      ```
+      urlpatterns = [
+          ...
+          path('xml/', show_xml, name='show_xml'),
+          path('json/' , show_json, name='show_json'),
+          path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+          path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+      ]
+      ```
  ---
