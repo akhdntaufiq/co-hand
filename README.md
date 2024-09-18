@@ -282,3 +282,15 @@ Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtens
       ]
       ```
  ---
+### 6️⃣ Postman Documentation
+1. `show_xml`
+<img src="public/XML_products.png" style="width:50%; height:auto;">
+
+2. `show_xml_by_id`
+<img src="public/XML_product_by_id.png" style="width:50%; height:auto;">
+
+3. `show_json`
+<img src="public/JSON_products.png" style="width:50%; height:auto;">
+
+4. `show_json_by_id`
+<img src="public/JSON_product_by_id.png" style="width:50%; height:auto;">
