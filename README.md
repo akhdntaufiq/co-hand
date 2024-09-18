@@ -2,10 +2,10 @@
 ### <i>Your Online Handmade Shop🛍️</i>
 ###### by Akhdan Taufiq Syofyan | PBP-D | 2306152475
 ##### 🔗WEB LINK : http://akhdan-taufiq-cohand.pbp.cs.ui.ac.id/
-## Table of Contents
-- [Jawaban Tugas 2: Implementasi Model-View-Template (MVT) pada Django](https://github.com/akhdntaufiq/co-hand?tab=readme-ov-file#jawaban-tugas-2) <br>
-- [Jawaban Tugas 3: Implementasi Form dan Data Delivery pada Django](https://github.com/akhdntaufiq/co-hand?tab=readme-ov-file#jawaban-tugas-3)
-## 🖋Jawaban Tugas 2
+
+<details>
+<summary><h3>🖋Tugas 2</h3></summary>
+
 ### 1️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
 1. Membuat direktori lokal dengan nama "co-hand" untuk proyek git, lalu konfigurasi git pada direktori tersebut.
    ```
@@ -151,7 +151,10 @@ Framework Django seringkali dijadikan permulaan pembelajaran dikarenakan menggun
 ### 5️⃣ Mengapa model pada Django disebut sebagai ORM?
 Model Django disebut ORM (Object-Relational Mapping) karena menghubungi objek Python dengan database relasional. ORM memungkinkan developer berinteraksi dengan database menggunakan kode Python, tanpa perlu menulis/menggunakan SQL secara langsung.
 
-## 🖋Jawaban Tugas 3
+</details>
+<details>
+<summary><h3>🖋Tugas 3</h3></summary>
+
  ### 1️⃣ Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 Data Delivery sangat penting dalam pengimplementasian sebuah platform. Mekanisme ini penting karena memungkinkan transfer informasi yang lebih akurat dan efisien antara user, sistem, dan juga device. Tanpa implementasi dari data delivery ini, platform tidak dapat berjalan secara maksimal dan memberikan hasil yang diharapkan.
 
@@ -294,3 +297,5 @@ Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtens
 
 4. `show_json_by_id`
 <img src="public/JSON_product_by_id.png" style="width:50%; height:auto;">
+
+</details>
