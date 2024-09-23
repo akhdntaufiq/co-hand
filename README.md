@@ -446,7 +446,7 @@ Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtens
      ```
      python manage.py runserver
      ```
-  2. Masuk ke dalam link berikut untuk mengakses [local server](http://localhost:8000/)
+  2. Masuk ke dalam link berikut untuk mengakses [local server](http://localhost:8000/login)
   3. Saat memasuki link tersebut, page pertama yang dilihat adalah login page
   4. Dengan asumsi belum ada akun yang terdaftar, maka lakukan registrasi dengan cara menekan hyperlink "Register Now" untuk memasuk page registrasi. Dalam page registrasi, isi segala hal yang diminta seperti username dan passsword. Lakukan langkah ini sebanyak 3 kali untuk membuat 3 akun.
   5. Selanjutnya, saya membuat tiga dummy data produk kerajinan tangan di setiap akun. Setelah login, maka page yang setelahnya diliat adalah main page dimana kita bisa menambah produk dan logout dari akun yang sebelumnya dipakai untuk login. Untuk menambahkan dummy data atau pada web saya adalah produk, maka bisa langsung memencet button "Add New Product" yang mengarahkan user ke page create product.
@@ -476,5 +476,47 @@ Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtens
             return redirect('main:show_main')
          context = {'form': form}
          return render(request, "create_product.html", context)
+      ```
+   3. Jika ingin, objek products hanya bisa dilihat oleh user yang diinput, maka bisa mengubah fungsi `show_main` pada `views.py` dengan kode berikut.
+      ```
+      ...
+      def show_main(request):
+         products = Product.objects.filter(user=request.user)
+         context = {
+            'app' : 'Co-Hand',
+            'name': request.user.username,
+            ...
+      ```
+- **Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi**
+   1. Menambahkan import berikut pada berkas `views.pu` dalam direktori `main`.
+      ```
+      import datetime
+      from django.http import HttpResponseRedirect
+      from django.urls import reverse
+      ```
+   2. Memodifikasi kode pada fungsi `login_user` untuk menerapkan cookies.
+      ```
+      ...
+      if form.is_valid():
+         user = form.get_user()
+         login(request, user)
+         response = HttpResponseRedirect(reverse("main:show_main"))
+         response.set_cookie('last_login', str(datetime.datetime.now()))
+      return response
+      ...
+      ```
+   3. Menambahkan variabel last_login `context` pada fungsi `show_main` untuk mengambil timedate last login user.
+      ```
+      ...
+      'last_login': request.COOKIES['last_login']
+      ...
+      ```
+   4. Mengubah fungsi `logout_user` untuk menghapus cookie.
+      ```
+      def logout_user(request):
+         logout(request)
+         response = HttpResponseRedirect(reverse('main:login'))
+         response.delete_cookie('last_login')
+         return response
       ```
 </details>
