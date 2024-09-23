@@ -519,4 +519,8 @@ Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtens
          response.delete_cookie('last_login')
          return response
       ```
+   5. Menampilkan data last login pada main page dengan cara menambah kode berikut kedalam berkas `main.html`.
+      ```
+      <h5>Sesi terakhir login: {{ last_login }}</h5>
+      ```
 </details>
