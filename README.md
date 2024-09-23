@@ -304,9 +304,141 @@ Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtens
 <summary><h3>🖋Tugas 4</h3></summary>
    
 ### 1️⃣ Apa perbedaan antara HttpResponseRedirect() dan redirect()?
-### 2️⃣ Jelaskan cara kerja penghubungan model MoodEntry dengan User!
-### 3️⃣ Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
-### 4️⃣ Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
-### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
 
+### 2️⃣ Jelaskan cara kerja penghubungan model MoodEntry dengan User!
+
+### 3️⃣ Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+
+### 4️⃣ Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+
+### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+- **Implementasi Fungsi Login, Logout, dan Registrasi**
+  1. Mengimport library berikut untuk kebutuhan fitur registrasi, login, dan logout pada berkas `views.py` di direktori `main`.
+     ```
+     from django.contrib import messages
+     from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+     from django.contrib.auth import authenticate, login, logout
+     ```
+  2. Menambahkan fungsi-fungsi berikut pada berkas `views.py` di direktori `main`.
+     ```
+     def register(request):
+        form = UserCreationForm()
+        if request.method == "POST":
+           form = UserCreationForm(request.POST)
+           if form.is_valid():
+               form.save()
+               messages.success(request, 'Your account has been successfully created!')
+               return redirect('main:login')
+        context = {'form':form}
+        return render(request, 'register.html', context)
+
+      def login_user(request):
+         if request.method == 'POST':
+            form = AuthenticationForm(data=request.POST)
+            if form.is_valid():
+               user = form.get_user()
+               login(request, user)
+               response = HttpResponseRedirect(reverse("main:show_main"))
+               response.set_cookie('last_login', str(datetime.datetime.now()))
+               return response
+            else:
+               form = AuthenticationForm(request)
+         context = {'form': form}
+         return render(request, 'login.html', context)
+
+      def logout_user(request):
+         logout(request)
+         response = HttpResponseRedirect(reverse('main:login'))
+         response.delete_cookie('last_login')
+         return response
+     ```
+  3. Membuat file baru `register.html` di `main/templates`.
+     ```
+     {% extends 'base.html' %}
+
+      {% block meta %}
+      <title>Register</title>
+      {% endblock meta %}
+      
+      {% block content %}
+      
+      <div class="login">
+        <h1>Register</h1>
+      
+        <form method="POST">
+          {% csrf_token %}
+          <table>
+            {{ form.as_table }}
+            <tr>
+              <td></td>
+              <td><input type="submit" name="submit" value="Daftar" /></td>
+            </tr>
+          </table>
+        </form>
+      
+        {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      
+      {% endblock content %}
+     ```
+  4. Membuat file baru `login.html` di `main/templates`.
+     ```
+     {% extends 'base.html' %}
+
+      {% block meta %}
+      <title>Login</title>
+      {% endblock meta %}
+      
+      {% block content %}
+      <div class="login">
+        <h1>Login</h1>
+      
+        <form method="POST" action="">
+          {% csrf_token %}
+          <table>
+            {{ form.as_table }}
+            <tr>
+              <td></td>
+              <td><input class="btn login_btn" type="submit" value="Login" /></td>
+            </tr>
+          </table>
+        </form>
+      
+        {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} Don't have an account yet?
+        <a href="{% url 'main:register' %}">Register Now</a>
+      </div>
+      
+      {% endblock content %}
+     ```
+  5. Menambahkan button logout pada berkas `main.html` untuk menjalankan fitur logout
+     ```
+      <a href="{% url 'main:logout' %}">
+      <button>Logout</button>
+      </a>
+     ```
+  6. Menambahkan path url baru di berkas `urls.py` yang berada di dalam `main`
+     ```
+      path('register/', register, name='register'),
+      path('login/', login_user, name='login'),
+      path('logout/', logout_user, name='logout'),
+     ```
+  7. Restriksi akses ke halaman main agar halaman hanya bisa diakses oleh pengguna yang memiliki akun dengan cara menambahkan kode berikut pada berkas `views.py` pada direktori `main`.
+     ```
+     from django.contrib.auth.decorators import login_required
+     ...
+     @login_required(login_url='/login')
+     def show_main(request):
+     ```
 </details>
