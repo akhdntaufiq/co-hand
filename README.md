@@ -441,4 +441,40 @@ Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtens
      @login_required(login_url='/login')
      def show_main(request):
      ```
+- **Membuat dua akun pengguna dengan masing-masing tiga dummy data di lokal**
+  1. Menjalankan server lokal dengan command berikut di dalam direktori co-hand lokal
+     ```
+     python manage.py runserver
+     ```
+  2. Masuk ke dalam link berikut untuk mengakses [local server](http://localhost:8000/)
+  3. Saat memasuki link tersebut, page pertama yang dilihat adalah login page
+  4. Dengan asumsi belum ada akun yang terdaftar, maka lakukan registrasi dengan cara menekan hyperlink "Register Now" untuk memasuk page registrasi. Dalam page registrasi, isi segala hal yang diminta seperti username dan passsword. Lakukan langkah ini sebanyak 3 kali untuk membuat 3 akun.
+  5. Selanjutnya, saya membuat tiga dummy data produk kerajinan tangan di setiap akun. Setelah login, maka page yang setelahnya diliat adalah main page dimana kita bisa menambah produk dan logout dari akun yang sebelumnya dipakai untuk login. Untuk menambahkan dummy data atau pada web saya adalah produk, maka bisa langsung memencet button "Add New Product" yang mengarahkan user ke page create product.
+  6. Setelah berada di page create product, saya mengisi segala deskripsi produk yang dibutuhkan. Lalu, untuk men-submit data tersebut ke database, saya memencet button "Add product" sehingga data produk pun masuk ke dalam database akun tersebut. Saya melakukan langkah ini 3 kali untuk setiap akun sehingga masing-masing akun memiliki 3 dummy data.
+  7. Bukti Pengerjaan:
+
+-  **Menghubungkan model Product dengan User**
+   1. Menambahkan library User dan isi dari variabel user pada berkas `models.py`
+      ```
+      ...
+      from django.contrib.auth.models import User
+      ...
+      class MoodEntry(models.Model):
+         user = models.ForeignKey(User, on_delete=models.CASCADE)
+      ...
+      ...
+      ```
+   2. Mengubah fungsi `create_product` pada berkas `views.py` pada direktori `main` untuk menghubungkan setiap produk dengan user yang meng-input
+      ```
+      def create_product(request):
+         form = ProductEntryForm(request.POST or None)
+
+         if form.is_valid() and request.method == "POST":
+            product = form.save(commit=False)
+            product.user = request.user
+            product.save()
+            return redirect('main:show_main')
+         context = {'form': form}
+         return render(request, "create_product.html", context)
+      ```
 </details>
