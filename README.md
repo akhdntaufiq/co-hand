@@ -480,7 +480,8 @@ class Product(models.Model) :
   4. Dengan asumsi belum ada akun yang terdaftar, maka lakukan registrasi dengan cara menekan hyperlink "Register Now" untuk memasuk page registrasi. Dalam page registrasi, isi segala hal yang diminta seperti username dan passsword. Lakukan langkah ini sebanyak 3 kali untuk membuat 3 akun.
   5. Selanjutnya, saya membuat tiga dummy data produk kerajinan tangan di setiap akun. Setelah login, maka page yang setelahnya diliat adalah main page dimana kita bisa menambah produk dan logout dari akun yang sebelumnya dipakai untuk login. Untuk menambahkan dummy data atau pada web saya adalah produk, maka bisa langsung memencet button "Add New Product" yang mengarahkan user ke page create product.
   6. Setelah berada di page create product, saya mengisi segala deskripsi produk yang dibutuhkan. Lalu, untuk men-submit data tersebut ke database, saya memencet button "Add product" sehingga data produk pun masuk ke dalam database akun tersebut. Saya melakukan langkah ini 3 kali untuk setiap akun sehingga masing-masing akun memiliki 3 dummy data.
-  7. Bukti Pengerjaan:
+  7. Bukti Pengerjaan: <br>
+     <img src="public/dummydata.png" style="width:50%; height:auto;">
 
 -  **Menghubungkan model Product dengan User**
    1. Menambahkan library User dan isi dari variabel user pada berkas `models.py`
