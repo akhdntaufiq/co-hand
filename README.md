@@ -4,9 +4,9 @@
 ##### 🔗WEB LINK : http://akhdan-taufiq-cohand.pbp.cs.ui.ac.id/
 
 <details>
-<summary><h3>🖋Tugas 2</h3></summary>
+<summary><b>🖋Tugas 2</b></summary>
 
-### 1️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
+#### 1️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
 1. Membuat direktori lokal dengan nama "co-hand" untuk proyek git, lalu konfigurasi git pada direktori tersebut.
    ```
    git init
@@ -131,47 +131,47 @@
 24. Dengan mengikuti langkah-langkah diatas, maka deployment project django saya pun selesai.
 ---
 
-### 2️⃣ Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html!
+#### 2️⃣ Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html!
 <img src="public/djangoflow_image.png" style="width:50%; height:auto;">
 
 ---
 
 
-### 3️⃣ Jelaskan fungsi git dalam pengembangan perangkat lunak!
+#### 3️⃣ Jelaskan fungsi git dalam pengembangan perangkat lunak!
 Git dalam pengembangan perangkat lunak sangat menguntungkan developer karena membantu melacak perubahan kode, menggabungkan (merge) perubahan, membuat percabangan (branch) untuk penambahan fitur, atau bahkan memungkinkan untuk kembali ke versi sebelumnya jika diperlukan. Hal ini saat dibutuhkan dalam sebuah project yang memerlukan kolaborasi banyak developer dalam satu waktu sehingga meningkatkan efisiensi waktu.
 
 ---
 
 
-### 4️⃣ Mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
+#### 4️⃣ Mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
 Framework Django seringkali dijadikan permulaan pembelajaran dikarenakan menggunakan bahasa Python yang mudah dipahami sehingga membuat pemula dapat lebih fokus dalam pemrograman web. Selain itu, arsitektur MVT (Model-View-Template) pada Django yang membuat struktur aplikasi yang terorganisir, ekosistem yang matang, serta dokumentasi yang jelas membuat Django menjadi salah satu pilihan yang tepat untuk permulaan pembelajaran *software development*.
 
 ---
 
-### 5️⃣ Mengapa model pada Django disebut sebagai ORM?
+#### 5️⃣ Mengapa model pada Django disebut sebagai ORM?
 Model Django disebut ORM (Object-Relational Mapping) karena menghubungi objek Python dengan database relasional. ORM memungkinkan developer berinteraksi dengan database menggunakan kode Python, tanpa perlu menulis/menggunakan SQL secara langsung.
 
 </details>
 <details>
-<summary><h3>🖋Tugas 3</h3></summary>
+<summary><b>🖋Tugas 3</b></summary>
 
- ### 1️⃣ Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+ #### 1️⃣ Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 Data Delivery sangat penting dalam pengimplementasian sebuah platform. Mekanisme ini penting karena memungkinkan transfer informasi yang lebih akurat dan efisien antara user, sistem, dan juga device. Tanpa implementasi dari data delivery ini, platform tidak dapat berjalan secara maksimal dan memberikan hasil yang diharapkan.
 
 ---
- ### 2️⃣ Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+ #### 2️⃣ Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtensible Markup Language) karena formatnya yang lebih mudah dibaca, yaitu {key:value} seperti data type dictionary pada python. Selain readability yang baik, kinerja parsing JSON juga lebih cepat dikarenakan struktur data yang sederhana serta bisa diubah menjadi objek di JavaScript tanpa memerlukan banyak langkah tambahan. Berbanding terbalik dengan XML yang memerlukan langkah lebih banyak dikarenakan adanya tag dan atribut yang kompleks. Dengan berbagai kemudahan yang diberikan oleh JSON, membuat JSON lebih populer dibandingkan XML.
 
 ---
- ### 3️⃣ Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+ #### 3️⃣ Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
 *Method* `is_valid()` pada *form* Django memiliki peran penting dalam aspek integritas dan validasi data. Secara garis besar, method ini akan melakukan validasi menyeluruh terhadap setiap *field*. Jika terdapat kesalahan dalam proses ini, *method* ini akan me-*return* nilai *False*. Namun, jika semua validasi berhasil dilewati, maka *method* akan melakukan validasi data ke dalam atribut `cleaned_data` dari *form* dan me-*return* nilai *True*.
 
  ---
- ### 4️⃣ Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+ #### 4️⃣ Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
 `csrf_token` pada Django dibutuhkan untuk melindungi web dari serangan Cross-Site Request Forgery (CSRF). Jika kita tidak menyertakan CSRF token dalam form Django, maka permintaan POST bisa berasal dari site yang tidak sah, atau bahkan bisa saja berbahaya. Pada implementasinya, Django akan menyisipkan token ke dalam form HTML menggunakan tag template dimana tag ini akan menghasilkan input tersembunyi dengan nilai token yang unik. Token yang di-generate ini akan selalu disertakan dalam data request sehingga di saat ada permintaan POST dari form, token akan diekstrak dan dibandingkan dengan token yang disimpan di session user. Berbagai proses ini jika dilewatkan, akan memudahkan penyerang karena dapat melakukan POST request ke server tanpa sepengetahuan user.
 
  ---
- ### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+ #### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
  - **Membuat input form untuk menambahkan objek model pada app sebelumnya.**
    1. Membuat berkas `forms.py ` pada direktori main.
       ```
@@ -301,17 +301,46 @@ Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtens
 </details>
 
 <details>
-<summary><h3>🖋Tugas 4</h3></summary>
+<summary><b>🖋Tugas 4</b></summary>
    
-### 1️⃣ Apa perbedaan antara HttpResponseRedirect() dan redirect()?
+#### 1️⃣ Apa perbedaan antara HttpResponseRedirect() dan redirect()?
+`HttpResponseRedirect()` adalah class bawaan Django yang digunakan untuk mengarahkan pengguna ke URL tertentu secara manual dengan membutuhkan URL lengkap atau relatif sebagai parameter. Sebaliknya, `redirect()` adalah fungsi shortcut yang lebih fleksibel karena dapat menerima URL, nama view, ataupun objek sebagai paramaternya, dan secara otomatis mengarahkan pengguna ke lokasi yang tepat. Walaupun demikian, `redirect()` secara internal menggunakan `HttpResponseRedirect()`, yakni `redirect()` akan mengonversi parameter menjadi sebuah URL dan mengembalikan `HttpResponseRedirect()`. Karena itulah keduanya bisa dibilang melakukan hal yang sama, namun `redirect()` lebih fleksibel dalam penggunaannya.
 
-### 2️⃣ Jelaskan cara kerja penghubungan model MoodEntry dengan User!
+---
+#### 2️⃣ Jelaskan cara kerja penghubungan model MoodEntry dengan User!
+Dalam Django, penghubungan model `MoodEntry` dengan model `User` dilakukan menggunakan `ForeignKey`, yang merupakan tipe field yang memungkinkan kita untuk menyimpan referensi ke objek lain, dalam hal ini, pengguna. Ketika kita mendeklarasikan `user = models.ForeignKey(User, on_delete=models.CASCADE)`, kita memastikan bahwa setiap entri mood akan memiliki referensi ke pengguna yang membuatnya. Ini menciptakan relasi many-to-one, di mana satu pengguna bisa memiliki banyak entri mood.
 
-### 3️⃣ Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+Contoh implementasi dari hubungan model MoodEntry dengan User adalah sebagai berikut:
+```
+...
+class Product(models.Model) :
+   user = models.ForeignKey(User, on_delete=models.CASCADE)
+   mood = models.CharField(max_length=255)
+   time = models.DateField(auto_now_add=True)
+   feelings = models.TextField()
+   ...   
+```
+---
 
-### 4️⃣ Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+#### 3️⃣ Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+- **Authentication**
+   - Authentication adalah proses untuk verifikasi data user. Pada umumnya, user diminta untuk memasukkan kredensial yang layak seperti username dan password
+  - Implementasi pada Django:
+     Pada Django, proses authentication dilakukan dalam fitur login. Setelah user memasukkan kredensial, Django akan memverifikasi apakah kredensial valid atau tidak.
+- **Authorization**
+  - Authorization adalah proses penentuan hak akses yang dapat dan tidak dapat dilakukan oleh seorang user dalam aplikasi. Hal ini berkaitan dengan pengaturan akses ke sumber daya tertentu
+  - Implementasi pada Django:
+     Setelah proses authentication, Django akan memverifikasi izin user untuk menentukan akses mereka ke berbagai bagian aplikasi. Hal ini diatur dengan menggunakan decorator, seperti `@login_required`.
 
-### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+---
+
+#### 4️⃣ Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+- Django mengingat pengguna yang sudah login dengan menggunakan session yang dikelola melalui cookie. Ketika pengguna login, Django membuat sesi khusus untuk mereka dan menyimpan informasi penting di server. Di sisi pengguna, Django menempatkan session ID dalam cookie di browser. Jadi, setiap kali pengguna mengunjungi halaman lain, browser mengirimkan session ID tersebut ke server, dan Django tahu siapa pengguna tersebut tanpa perlu login lagi.
+- Cookies tidak hanya digunakan untuk mengingat sesi pengguna, tetapi juga bisa digunakan untuk menyimpan preferensi atau melacak aktivitas. Namun, tidak semua cookies aman digunakan. Agar terlindungi dari serangan, cookies harus dikonfigurasi dengan benar menggunakan fitur seperti `Secure` untuk memastikan cookie hanya dikirim melalui koneksi HTTPS, `HttpOnly` untuk mencegah akses oleh JavaScript, dan `SameSite` untuk membatasi pengiriman cookie lintas situs yang dapat mengurangi risiko serangan CSRF.
+
+---
+
+#### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
 - **Implementasi Fungsi Login, Logout, dan Registrasi**
   1. Mengimport library berikut untuk kebutuhan fitur registrasi, login, dan logout pada berkas `views.py` di direktori `main`.
      ```
