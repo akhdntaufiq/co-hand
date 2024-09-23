@@ -299,3 +299,14 @@ Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtens
 <img src="public/JSON_product_by_id.png" style="width:50%; height:auto;">
 
 </details>
+
+<details>
+<summary><h3>🖋Tugas 4</h3></summary>
+   
+### 1️⃣ Apa perbedaan antara HttpResponseRedirect() dan redirect()?
+### 2️⃣ Jelaskan cara kerja penghubungan model MoodEntry dengan User!
+### 3️⃣ Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+### 4️⃣ Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+</details>
