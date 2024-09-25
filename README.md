@@ -307,10 +307,10 @@ Menurut saya, JSON (JavaScript Object Notation) lebih baik dibanding XML (eXtens
 `HttpResponseRedirect()` adalah class bawaan Django yang digunakan untuk mengarahkan pengguna ke URL tertentu secara manual dengan membutuhkan URL lengkap atau relatif sebagai parameter. Sebaliknya, `redirect()` adalah fungsi shortcut yang lebih fleksibel karena dapat menerima URL, nama view, ataupun objek sebagai paramaternya, dan secara otomatis mengarahkan pengguna ke lokasi yang tepat. Walaupun demikian, `redirect()` secara internal menggunakan `HttpResponseRedirect()`, yakni `redirect()` akan mengonversi parameter menjadi sebuah URL dan mengembalikan `HttpResponseRedirect()`. Karena itulah keduanya bisa dibilang melakukan hal yang sama, namun `redirect()` lebih fleksibel dalam penggunaannya.
 
 ---
-#### 2️⃣ Jelaskan cara kerja penghubungan model MoodEntry dengan User!
-Dalam Django, penghubungan model `MoodEntry` dengan model `User` dilakukan menggunakan `ForeignKey`, yang merupakan tipe field yang memungkinkan kita untuk menyimpan referensi ke objek lain, dalam hal ini, pengguna. Ketika kita mendeklarasikan `user = models.ForeignKey(User, on_delete=models.CASCADE)`, kita memastikan bahwa setiap entri mood akan memiliki referensi ke pengguna yang membuatnya. Ini menciptakan relasi many-to-one, di mana satu pengguna bisa memiliki banyak entri mood.
+#### 2️⃣ Jelaskan cara kerja penghubungan model Product dengan User!
+Dalam Django, penghubungan model `Product` dengan model `User` dilakukan menggunakan `ForeignKey`, yang merupakan tipe field yang memungkinkan kita untuk menyimpan referensi ke objek lain, dalam hal ini, pengguna. Ketika kita mendeklarasikan `user = models.ForeignKey(User, on_delete=models.CASCADE)`, kita memastikan bahwa setiap entri prodduct akan memiliki referensi ke pengguna yang membuatnya. Ini menciptakan relasi many-to-one, di mana satu pengguna bisa memiliki banyak entri product.
 
-Contoh implementasi dari hubungan model MoodEntry dengan User adalah sebagai berikut:
+Contoh implementasi dari hubungan model Product dengan User adalah sebagai berikut:
 ```
 ...
 class Product(models.Model) :
