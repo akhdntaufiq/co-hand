@@ -605,7 +605,7 @@ Jika terdapat beberapa CSS selector untuk suatu elemen HTML, maka berikut adalah
 ---
 #### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
 - **Implementasi Fungsi Menghapus dan Mengedit**
-  1. Menambahkan fungsi-fungsi berikut pada berkas `views.py` di direktori `main`
+  - Menambahkan fungsi-fungsi berikut pada berkas `views.py` di direktori `main`
      ```
       def edit_product(request, id):
          product = Product.objects.get(pk = id)
@@ -625,17 +625,50 @@ Jika terdapat beberapa CSS selector untuk suatu elemen HTML, maka berikut adalah
          
          return HttpResponseRedirect(reverse('main:show_main'))
      ```
-   2. Meng-import fungsi yang dibuat sebelumnya ke dalam berkas `urls.py` pada `main`
+  - Meng-import fungsi yang dibuat sebelumnya ke dalam berkas `urls.py` pada `main`
       ```
       from main.views import ...,edit_product, delete_product
       ```
-   4. Menambahkan path url baru di berkas `urls.py` yang berada di dalam `main`
+  - Menambahkan path url baru di berkas `urls.py` yang berada di dalam `main`
       ```
       ...
       path('edit-product/<uuid:id>', edit_product, name='edit_product'),
       path('delete/<uuid:id>', delete_product, name='delete_product'),
       ```
-   5. 
----
+  - Membuat berkas `edit_product.html` pada direktori `main/templates/`
+  - Menambahkan hyperlink untuk delete dan edit pada setiap produk (membentuk button)
+      ```
+      <tr>
+       ...
+       <td>
+           <a href="{% url 'main:edit_product' product.pk %}">
+               <button>
+                   Edit
+               </button>
+           </a>
+       </td>
+       <td>
+           <a href="{% url 'main:delete_product' product.pk %}">
+               <button>
+                   Delete
+               </button>
+           </a>
+       </td>
+      </tr>
+      ```
+
+- **Kustomisasi desain pada template HTML menggunakan CSS Framework (Tailwind)**
+  - Membuat folder `static` pada root folder. Lalu, membuat dua folder di dalamnya dengan nama `css` dan `image`. Langkah ini diperlukan untuk menyimpan komponen yang akan digunakan secara statis pada pengerjaan proyek. Setelah itu, membuat file `global.css` dalam direktori `static/css/` yang akan digunakan jika memerlukan kustomisasi CSS secara keseluruhan (eksternal stylesheet)
+  - Menambahkan CDN Tailwind dan menyambungkan `global.css` ke seluruh proyek html di bagian `<head>` pada file `base.html`
+    ```
+    <head>
+       ...
+       <script src="https://cdn.tailwindcss.com"></script>
+       <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
+    </head>
+    ```
+  - Membuat file `card_product.html` pada direktori `main/templates/`
+  - Membuat file `navbar.html` pada direktori `templates/`
+  - Langkah terakhir adalah kustomisasi segala page html yang dibuat menggunakan framework CSS, yaitu tailwind. CSS Selector yang banyak saya gunakan adalah inline style.
 
 </details>
