@@ -518,7 +518,7 @@ class Product(models.Model) :
             ...
       ```
 - **Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi**
-   1. Menambahkan import berikut pada berkas `views.pu` dalam direktori `main`.
+   1. Menambahkan import berikut pada berkas `views.py` dalam direktori `main`.
       ```
       import datetime
       from django.http import HttpResponseRedirect
@@ -553,4 +553,89 @@ class Product(models.Model) :
       ```
       <h5>Sesi terakhir login: {{ last_login }}</h5>
       ```
+</details>
+<details>
+   <summary><b>🖋Tugas 5</b></summary>
+   
+   #### 1️⃣ Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+Jika terdapat beberapa CSS selector untuk suatu elemen HTML, maka berikut adalah urutan prioritasnya dari prioritas yang paling tinggi:
+1. **Inline Style**
+   Inline style adalah style yang didefinisikan langsung dalam suatu baris menggunakan atribut `style`. Style dalam baris ini langsung dikaitkan pada sebuah elemen tertentu.
+   Contoh:
+   ```
+   <p style="font : bold;">Font pada teks ini tebal</p>
+   ```
+2. **External dan Internal Style Sheets**
+   Style tipe ini ditulis di dalam tag `<style>` di dalam file HTML yang sama ataupun menggunakan file CSS terpisah yang akan di-link ke dalam suatu halaman HTML. Style jenis ini akan digunakan dalam keseluruhan elemen pada suatu file HTML dengan syarat tidak ada inline style yang digunakan pada elemen tersebut.
+   Contoh:
+   ```
+   <style>
+     p {
+      color: red;
+      }
+   </style>
+   ```
+3. **Browser Default**
+   Style jenis browser default ini adalah prioritas terakhir dari seluruh jenis style yang ada. Style ini akan digunakan jika tidak ada style yang dibuat oleh developer. Contohnya adalah tag `<h2>` jika tidak set untuk suatu style, maka browser default akan menggunakan style default akan menggunakan font Times New Roman dengan weight bold.
+   
+---
+   #### 2️⃣ Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+   
+   Responsive design menjadi konsep yang penting dalam pengembangan aplikasi web karena pengguna mengakses aplikasi dari berbagai perangkat dengan ukuran layar yang berbeda, seperti desktop, tablet, dan ponsel. Responsive design memastikan bahwa tampilan dan fungsionalitas aplikasi web tetap optimal di semua perangkat, memberikan pengalaman pengguna yang konsisten dan nyaman. Beberapa contoh dari aplikasi yang sudah menerapkan responsive design adalah Instagram, Twitter dan Youtube. Dan untuk contoh aplikasi yang belum menerapkan responsive design adalah SIAK-NG yang disediakan oleh UI dikarenakan SIAK menggunakan skala yang tidak sesuai untuk mobile user sehingga user harus melakukan zoom in/out untuk membaca konten yang tersedia.
+   
+---
+   #### 3️⃣ Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+   **Perbedaan Margin, Border, dan Padding dalam CSS**
+
+| **Komponen** | **Definisi**                                                                 | **Fungsi**                                          | **Penampilan**                          | **Contoh Penggunaan CSS**                                                                 |
+|--------------|------------------------------------------------------------------------------|-----------------------------------------------------|-----------------------------------------|-------------------------------------------------------------------------------------------|
+| **Margin**   | Ruang di luar border yang memisahkan elemen-elemen HTML satu dengan lainnya   | Memberikan jarak antar elemen di halaman web         | Transparan, tidak mempengaruhi konten   | `margin: 20px;`                                                                           |
+| **Border**   | Garis yang mengelilingi padding dan konten                                   | Mengelilingi elemen dengan garis, warna, dan gaya    | Dapat diubah warna, ketebalan, dan gaya | `border: 2px solid black;`                                                                |
+| **Padding**  | Ruang di dalam border yang memberikan jarak antara konten dan border         | Memberikan jarak antara konten dan border            | Transparan, hanya menggeser konten      | `padding: 10px;`                                                                          |
+
+---
+#### 4️⃣ Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+- **Flexbox**
+   - **Satu Dimensi**: Flexbox fokus pada penataan elemen dalam satu arah, baik horizontal maupun vertikal, membuatnya mudah untuk mengatur elemen dalam ruang yang tersedia.
+   - **Penyesuaian Mudah**: Memudahkan penyusunan dan penyelarasan elemen dengan menggunakan properti seperti align-items dan justify-content, cocok untuk desain responsif.
+- **Grid Layout**
+   - **Dua Dimensi**: CSS Grid Layout memungkinkan pengaturan elemen dalam baris dan kolom, ideal untuk layout yang lebih kompleks.
+   - **Kontrol Lebih Baik**: Dengan penggunaan area dan garis grid, kita bisa mengatur elemen dengan lebih presisi, menjadikannya lebih terorganisir.
+
+---
+#### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+- **Implementasi Fungsi Menghapus dan Mengedit**
+  1. Menambahkan fungsi-fungsi berikut pada berkas `views.py` di direktori `main`
+     ```
+      def edit_product(request, id):
+         product = Product.objects.get(pk = id)
+
+         form = ProductEntryForm(request.POST or None, instance=product)
+
+         if form.is_valid() and request.method == "POST":
+           form.save()
+           return HttpResponseRedirect(reverse('main:show_main'))
+         
+         context = {'form': form}
+         return render(request, "edit_product.html", context)
+
+      def delete_product(request, id):
+         product = Product.objects.get(pk = id)
+         product.delete()
+         
+         return HttpResponseRedirect(reverse('main:show_main'))
+     ```
+   2. Meng-import fungsi yang dibuat sebelumnya ke dalam berkas `urls.py` pada `main`
+      ```
+      from main.views import ...,edit_product, delete_product
+      ```
+   4. Menambahkan path url baru di berkas `urls.py` yang berada di dalam `main`
+      ```
+      ...
+      path('edit-product/<uuid:id>', edit_product, name='edit_product'),
+      path('delete/<uuid:id>', delete_product, name='delete_product'),
+      ```
+   5. 
+---
+
 </details>
