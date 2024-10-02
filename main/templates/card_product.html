@@ -1,0 +1,18 @@
+{% load static %}
+<div class="bg-[#FFFAEF] rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl h-full flex flex-col">
+    <div class="h-48 bg-gray-200 overflow-hidden">
+        <img class="w-full h-full object-cover" src="{% static 'image/product_icon.png' %}" alt="Product Image">
+    </div>
+    <div class="p-4 flex flex-col flex-grow">
+        <h2 class="text-lg font-bold mb-2 text-[#604B4B] line-clamp-2">{{ product.name }}</h2>
+        <p class="text-xl font-bold text-[#525D42] mb-2">Rp. {{ product.price }}</p>
+        <p class="text-[#604B4B] text-sm mb-4 flex-grow line-clamp-3">
+            {{ product.description }}
+        </p>
+        <p class="text-gray-500 text-xs mb-4">Added: {{ product.date_added|date:"d/m/Y" }}</p>
+        <div class="flex flex-col gap-2 mt-auto">
+            <a href="{% url 'main:edit_product' product.pk %}" class="w-full bg-[#8FA175] hover:bg-[#76865F] text-[#FFF8E6] font-bold py-2 px-4 rounded text-center">Edit</a>
+            <a href="{% url 'main:delete_product' product.pk %}" class="w-full bg-[#F05555] hover:bg-[#EF3D3D] text-[#FFF8E6] font-bold py-2 px-4 rounded text-center">Delete</a>
+        </div>
+    </div>
+</div>

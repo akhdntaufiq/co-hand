@@ -1,48 +1,54 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Co-Hand</title>
+{% endblock meta %}
+
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
-<body>
-    <h1>Hello {{name}}, Welcome to {{app}}</h1>
-    <h5><i>"Karya Tangan, Penuh Makna"</i></h5>
-</body>
+{% include 'navbar.html' %}
+<div class="bg-[#EDE8DC] min-h-screen pt-24 pb-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 text-center relative">
+            <h1 class="text-3xl font-bold text-[#604B4B] mb-2">Hello, {{ user.username }}!</h1>
+            <p class="text-sm text-[#957979] opacity-70 mb-4">Last Login: {{ last_login }}</p>
+            <div class="absolute top-0 right-0 md:relative md:mt-6 md:flex md:justify-center">
+                <a href="{% url 'main:create_product' %}" class="bg-[#76865F] hover:bg-[#525D42] text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 shadow-lg flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    Add Product
+                </a>
+            </div>
+        </div>
 
-{% if not products %}
-<p>Data Produk HandCraft belum tersedia....</p>
-{% else %}
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Description</th>
-    <th>Date Added</th>
-  </tr>
+        <div class="flex items-center justify-center mb-8">
+            <div class="h-0.5 bg-gray-300 flex-grow mr-4"></div>
+            <h2 class="text-2xl font-semibold text-gray-700 px-4">Our Products</h2>
+            <div class="h-0.5 bg-gray-300 flex-grow ml-4"></div>
+        </div>
+        
+        {% if not products %}
+        <div class="flex flex-col items-center justify-center bg-white rounded-lg shadow-md p-8">
+            <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-24 h-24 mb-4"/>
+            <p class="text-center text-gray-600">No products available in the store yet.</p>
+        </div>
+        {% else %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for product in products %}
+                {% include 'card_product.html' with product=product %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
 
-  {% for product in products %}
-  <tr>
-    <td>{{product.name}}</td>
-    <td>{{product.price}}</td>
-    <td>{{product.description}}</td>
-    <td>{{product.date_added}}</td>
-  </tr>
-  {% endfor %}
-</table>
-{% endif %}
-
-<br />
-
-<a href="{% url 'main:create_product' %}">
-  <button>Add New Product</button>
-</a>
-
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
-
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-
-<p>Made with 💖 by {{developer_name}} | {{class}} | {{npm}}</p>
+<footer class="bg-[#604B4B] text-[#EDE8DC] py-6">
+    <div class="container mx-auto text-center">
+        <p>&copy; {{ current_year }} Co-Hand. All rights reserved.</p>
+        <p class="mt-2">
+            Made with 💖 by {{developer_name}} - {{class}} - {{npm}}
+        </p>
+    </div>
+</footer>
 {% endblock content %}
