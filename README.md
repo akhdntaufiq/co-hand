@@ -672,3 +672,14 @@ Jika terdapat beberapa CSS selector untuk suatu elemen HTML, maka berikut adalah
   - Langkah terakhir adalah kustomisasi segala page html yang dibuat menggunakan framework CSS, yaitu tailwind. CSS Selector yang banyak saya gunakan adalah inline style.
 
 </details>
+
+<details>
+   <summary><b>🖋Tugas 6</b></summary>
+   
+   #### 1️⃣ Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+   #### 2️⃣ Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+   #### 3️⃣ Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+   #### 4️⃣ Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+   #### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+   
+</details>
