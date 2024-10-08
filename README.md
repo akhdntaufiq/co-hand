@@ -693,5 +693,101 @@ Pembersihan data input pengguna di frontend memang berguna untuk mencegah bebera
 
 ---
    #### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
-   
+- **AJAX GET**
+  - Mengubah blok conditional pengambilan produk yang sebelumnya diambil langsung dari fungsi `show_main` menjadi diambil melalui endpoint `/json` menggunakan ID khusus agar script JavaScript dapat menyuntikkan HTML-nya.
+    ```
+    <div id="product_cards"></div>
+    ```
+  - Membuat folder `js` pada `static` dan menambahkan berkas `scripts.js`
+  - Menambahkan source script menuju file `scripts.js` pada `main.html`
+    ```
+    ...
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% endblock content %}
+    ```
+  - Menambahkan beberapa script pada `scripts.js` untuk pengambilan produk dengan feth API, serta kebutuhan html yang dibutuhkan ID yang sudah dibuat sebelumnya. Beberapa function yang dibuat antara lain, fungsi asinkron `getProducts` dan `refreshProducts`.
+
+- **AJAX POST**
+  - Membuat sebuah tombol yang membuka sebuah modal dengan form untuk menambahkan produk.
+    ```
+      <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="bg-[#76865F] hover:bg-[#525D42] text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 shadow-lg flex items-center ml-4" onclick="showModal();">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        Add Product
+      </button>
+    ```
+    Tombol ini diarahkan ke `crudModal`, yang merupakan form yang akan dibuat nanti.
+  - Membuat form `crudModal` yang sebelumnya telah disebutkan di dalam berkas `main.html`. crudModal ini hanya akan muncul ketika di-trigger oleh tombol yang telah dibuat.
+  - Meng-import beberapa decorator dan menambahkan fungsi `create_product_ajax` pada berkas `views.py`.
+    ```
+         ...
+         from django.views.decorators.csrf import csrf_exempt
+         from django.views.decorators.http import require_POST
+         ...
+         @csrf_exempt
+         @require_POST
+         def add_product_ajax(request):
+             #fields = ["name", "price", "description"]
+             name = strip_tags(request.POST.get("name"))
+             price = request.POST.get("price")
+             description = strip_tags(request.POST.get("description"))
+             user = request.user
+             if (name == "" or description == "") :
+                 return
+             new_product = Product(
+                 name=name, price=price,
+                 description=description,
+                 user=user
+             )
+             new_product.save()
+             return HttpResponse(b"CREATED", status=201)
+    ```
+  - Menambahkan routing url untuk fungsi `create_product_ajax` pada berkas `urls.py`
+    ```
+         from main.views import add_product_ajax
+         ...
+         URL_PATTERN = [
+         ...
+         path('create-product-entry-ajax/', add_product_ajax, name='add_product_ajax'),
+         ]
+    ```
+  - Menghapus pengambilan variabel product pada fungsi `show_main` pada berkas `views.py` karena data produk akan didapatkan melalui fetch API dari endpoint `/json` dan mengubah pengambilan data pada `show_xml` dan `show_json` menjadi hasil filter sesuai user yang sedang login.
+    ```
+    data = Product.objects.filter(user=request.user)
+    ```
+  - Menghubungkan form di modal dengan path `/create-ajax/` menggunakan AJAX. Form tersebut akan mengirim data secara asinkronus ketika di-submit.
+    ```
+      function addProductEntry() {
+          fetch("create-product-entry-ajax/", {
+            method: "POST",
+            body: new FormData(document.querySelector('#productEntryForm')),
+          })
+          .then(response => refreshProducts())
+      
+          document.getElementById("productEntryForm").reset(); 
+          document.querySelector("[data-modal-toggle='crudModal']").click();
+          hideModal();
+      
+          return false;
+      }
+      
+      document.getElementById("productEntryForm").addEventListener("submit", (e) => {
+          e.preventDefault();
+          addProductEntry();
+      })
+    ```
+  - Menambahkan script untuk membuka dan menutup form di modal pada berkas `scripts.js`
+    ```
+      const modal = document.getElementById('crudModal');
+      const modalContent = document.getElementById('crudModalContent');
+    function showModal() {
+       ...
+    }
+    function showModal() {
+       ...
+    }
+    document.getElementById("cancelButton").addEventListener("click", hideModal);
+    document.getElementById("closeModalBtn").addEventListener("click", hideModal);
+    ```
 </details>
