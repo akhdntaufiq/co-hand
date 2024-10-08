@@ -677,9 +677,21 @@ Jika terdapat beberapa CSS selector untuk suatu elemen HTML, maka berikut adalah
    <summary><b>🖋Tugas 6</b></summary>
    
    #### 1️⃣ Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+   Javascript dalam pengembangan aplikasi web digunakan untuk meningkatkan interaktivitas aplikasi web. Salah satu contohnya adalah Javascript sangat berguna untuk interaksi dengan API dengan teknik seperti penggunaan AJAX untuk mengambil data secara asinkron tanpa kita harus melakukan reload untuk sebuah page, yang memberikan pengalaman pengguna yang lebih baik. Selain itu juga, penggunaan Javascript dapat dilakukan untuk manipulasi DOM sehingga kita dapat mengubah konten webpage secara langsung.
+
+---
    #### 2️⃣ Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+Penggunaan `await` digunakan dalam konteks fungi asinkron untuk menunggu hasil dari fungsi `fetch()`. Pengeksekusian kode setelahnya akan menunggu hingga `fetch()` menyelesaikan permintaan datanya. Jika tidak menggunakan `await`, maka fungsi `fetch()` akan mengembalikan sebuah promise dan eksekusi dari kode akan terus berjalan tanpa menunggu fetch menyelesaikan pemintaannya. Hal ini akan memungkinkan terjadinya kesalahan di baris berikutnya jika ingin mengakses data yang belum tersedia/masih dalam proses `fetch()`.
+
+---
    #### 3️⃣ Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+Decorator `csrf_exempt` diperlukan pada view yang akan menerima permintaan POST dari AJAX karena permintaan AJAX seringkali tidak menyertakan token CSRF secara otomatis. Oleh karena itu, kita bisa menggunakan `csrf_exempt` untuk menghindari kesalahan yang disebabkan oleh pelanggaran kebijakan CSRF.
+
+---
    #### 4️⃣ Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+Pembersihan data input pengguna di frontend memang berguna untuk mencegah beberapa kesalahan, namun tidak dapat sepenuhnya melindungi dengan baik. Pengguna bisa saja dengan mudah melewati validasi frontend, seperti menggunakan alat pengembang browser.  Dengan melakukan pembersihan data input pengguna di backend, kita bisa memastikan semua data yang diterima di server sudah tervalidasi dan tersanitasi dengan baik, sehingga bagaimanapun cara data tersebut masuk, data yang masuk akan dipastikan aman.
+
+---
    #### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
    
 </details>
