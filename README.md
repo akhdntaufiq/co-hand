@@ -790,4 +790,46 @@ Pembersihan data input pengguna di frontend memang berguna untuk mencegah bebera
     document.getElementById("cancelButton").addEventListener("click", hideModal);
     document.getElementById("closeModalBtn").addEventListener("click", hideModal);
     ```
+  - Untuk memastikan AJAX POST aman dari serangan XSS, kita bisa mengimpor `strip_tags` di `views.py` dan `forms.py`
+    ```
+    from django.utils.html import strip_tags
+    ```
+  - Menggunakan `strip_tags` pada fields yang memungkinkan untuk dimasukkannya tag html atau javascript dalam fungsi `add_product_ajax` di `views.py`
+    ```
+    def add_product_ajax(request):
+       name = strip_tags(request.POST.get("name"))  # Menghapus tag HTML
+       ...
+       description = strip_tags(request.POST.get("description"))
+       ...
+    ...
+    ```
+  - Menambahkan method `clean` di `forms.py`
+    ```
+    ...
+    class ProductEntryForm(ModelForm):
+       ...
+       def clean_name(self):
+           name = self.cleaned_data["name"]
+           return strip_tags(name)
+   
+       def clean_description(self):
+           description = self.cleaned_data["description"]
+           return strip_tags(description)
+    ...
+    
+    ```
+  - Menambahkan DOMPurify di frontend unutk mecegah eksekusi script yang mungkin saja masih ada di data
+    ```
+    ...
+    {% block meta %}
+    ...
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+    {% endblock meta %}
+    ...
+    ```
+  - Sanitasi setiap field data menggunakan DOMpurify sebelum ditampilkan pada halaman utama
+    ```
+    const name = DOMPurify.sanitize(product.fields.name);
+    const description = DOMPurify.sanitize(product.fields.description);
+    ```
 </details>
