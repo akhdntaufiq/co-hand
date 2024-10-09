@@ -672,3 +672,164 @@ Jika terdapat beberapa CSS selector untuk suatu elemen HTML, maka berikut adalah
   - Langkah terakhir adalah kustomisasi segala page html yang dibuat menggunakan framework CSS, yaitu tailwind. CSS Selector yang banyak saya gunakan adalah inline style.
 
 </details>
+
+<details>
+   <summary><b>🖋Tugas 6</b></summary>
+   
+   #### 1️⃣ Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+   Javascript dalam pengembangan aplikasi web digunakan untuk meningkatkan interaktivitas aplikasi web. Salah satu contohnya adalah Javascript sangat berguna untuk interaksi dengan API dengan teknik seperti penggunaan AJAX untuk mengambil data secara asinkron tanpa kita harus melakukan reload untuk sebuah page, yang memberikan pengalaman pengguna yang lebih baik. Selain itu juga, penggunaan Javascript dapat dilakukan untuk manipulasi DOM sehingga kita dapat mengubah konten webpage secara langsung.
+
+---
+   #### 2️⃣ Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+Penggunaan `await` digunakan dalam konteks fungi asinkron untuk menunggu hasil dari fungsi `fetch()`. Pengeksekusian kode setelahnya akan menunggu hingga `fetch()` menyelesaikan permintaan datanya. Jika tidak menggunakan `await`, maka fungsi `fetch()` akan mengembalikan sebuah promise dan eksekusi dari kode akan terus berjalan tanpa menunggu fetch menyelesaikan pemintaannya. Hal ini akan memungkinkan terjadinya kesalahan di baris berikutnya jika ingin mengakses data yang belum tersedia/masih dalam proses `fetch()`.
+
+---
+   #### 3️⃣ Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+Decorator `csrf_exempt` diperlukan pada view yang akan menerima permintaan POST dari AJAX karena permintaan AJAX seringkali tidak menyertakan token CSRF secara otomatis. Oleh karena itu, kita bisa menggunakan `csrf_exempt` untuk menghindari kesalahan yang disebabkan oleh pelanggaran kebijakan CSRF.
+
+---
+   #### 4️⃣ Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+Pembersihan data input pengguna di frontend memang berguna untuk mencegah beberapa kesalahan, namun tidak dapat sepenuhnya melindungi dengan baik. Pengguna bisa saja dengan mudah melewati validasi frontend, seperti menggunakan alat pengembang browser.  Dengan melakukan pembersihan data input pengguna di backend, kita bisa memastikan semua data yang diterima di server sudah tervalidasi dan tersanitasi dengan baik, sehingga bagaimanapun cara data tersebut masuk, data yang masuk akan dipastikan aman.
+
+---
+   #### 5️⃣ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+- **AJAX GET**
+  - Mengubah blok conditional pengambilan produk yang sebelumnya diambil langsung dari fungsi `show_main` menjadi diambil melalui endpoint `/json` menggunakan ID khusus agar script JavaScript dapat menyuntikkan HTML-nya.
+    ```
+    <div id="product_cards"></div>
+    ```
+  - Membuat folder `js` pada `static` dan menambahkan berkas `scripts.js`
+  - Menambahkan source script menuju file `scripts.js` pada `main.html`
+    ```
+    ...
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% endblock content %}
+    ```
+  - Menambahkan beberapa script pada `scripts.js` untuk pengambilan produk dengan feth API, serta kebutuhan html yang dibutuhkan ID yang sudah dibuat sebelumnya. Beberapa function yang dibuat antara lain, fungsi asinkron `getProducts` dan `refreshProducts`.
+
+- **AJAX POST**
+  - Membuat sebuah tombol yang membuka sebuah modal dengan form untuk menambahkan produk.
+    ```
+      <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="bg-[#76865F] hover:bg-[#525D42] text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 shadow-lg flex items-center ml-4" onclick="showModal();">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        Add Product
+      </button>
+    ```
+    Tombol ini diarahkan ke `crudModal`, yang merupakan form yang akan dibuat nanti.
+  - Membuat form `crudModal` yang sebelumnya telah disebutkan di dalam berkas `main.html`. crudModal ini hanya akan muncul ketika di-trigger oleh tombol yang telah dibuat.
+  - Meng-import beberapa decorator dan menambahkan fungsi `create_product_ajax` pada berkas `views.py`.
+    ```
+         ...
+         from django.views.decorators.csrf import csrf_exempt
+         from django.views.decorators.http import require_POST
+         ...
+         @csrf_exempt
+         @require_POST
+         def add_product_ajax(request):
+             #fields = ["name", "price", "description"]
+             name = strip_tags(request.POST.get("name"))
+             price = request.POST.get("price")
+             description = strip_tags(request.POST.get("description"))
+             user = request.user
+             if (name == "" or description == "") :
+                 return
+             new_product = Product(
+                 name=name, price=price,
+                 description=description,
+                 user=user
+             )
+             new_product.save()
+             return HttpResponse(b"CREATED", status=201)
+    ```
+  - Menambahkan routing url untuk fungsi `create_product_ajax` pada berkas `urls.py`
+    ```
+         from main.views import add_product_ajax
+         ...
+         URL_PATTERN = [
+         ...
+         path('create-product-entry-ajax/', add_product_ajax, name='add_product_ajax'),
+         ]
+    ```
+  - Menghapus pengambilan variabel product pada fungsi `show_main` pada berkas `views.py` karena data produk akan didapatkan melalui fetch API dari endpoint `/json` dan mengubah pengambilan data pada `show_xml` dan `show_json` menjadi hasil filter sesuai user yang sedang login.
+    ```
+    data = Product.objects.filter(user=request.user)
+    ```
+  - Menghubungkan form di modal dengan path `/create-ajax/` menggunakan AJAX. Form tersebut akan mengirim data secara asinkronus ketika di-submit.
+    ```
+      function addProductEntry() {
+          fetch("create-product-entry-ajax/", {
+            method: "POST",
+            body: new FormData(document.querySelector('#productEntryForm')),
+          })
+          .then(response => refreshProducts())
+      
+          document.getElementById("productEntryForm").reset(); 
+          document.querySelector("[data-modal-toggle='crudModal']").click();
+          hideModal();
+      
+          return false;
+      }
+      
+      document.getElementById("productEntryForm").addEventListener("submit", (e) => {
+          e.preventDefault();
+          addProductEntry();
+      })
+    ```
+  - Menambahkan script untuk membuka dan menutup form di modal pada berkas `scripts.js`
+    ```
+      const modal = document.getElementById('crudModal');
+      const modalContent = document.getElementById('crudModalContent');
+    function showModal() {
+       ...
+    }
+    function showModal() {
+       ...
+    }
+    document.getElementById("cancelButton").addEventListener("click", hideModal);
+    document.getElementById("closeModalBtn").addEventListener("click", hideModal);
+    ```
+  - Untuk memastikan AJAX POST aman dari serangan XSS, kita bisa mengimpor `strip_tags` di `views.py` dan `forms.py`
+    ```
+    from django.utils.html import strip_tags
+    ```
+  - Menggunakan `strip_tags` pada fields yang memungkinkan untuk dimasukkannya tag html atau javascript dalam fungsi `add_product_ajax` di `views.py`
+    ```
+    def add_product_ajax(request):
+       name = strip_tags(request.POST.get("name"))  # Menghapus tag HTML
+       ...
+       description = strip_tags(request.POST.get("description"))
+       ...
+    ...
+    ```
+  - Menambahkan method `clean` di `forms.py`
+    ```
+    ...
+    class ProductEntryForm(ModelForm):
+       ...
+       def clean_name(self):
+           name = self.cleaned_data["name"]
+           return strip_tags(name)
+   
+       def clean_description(self):
+           description = self.cleaned_data["description"]
+           return strip_tags(description)
+    ...
+    
+    ```
+  - Menambahkan DOMPurify di frontend unutk mecegah eksekusi script yang mungkin saja masih ada di data
+    ```
+    ...
+    {% block meta %}
+    ...
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+    {% endblock meta %}
+    ...
+    ```
+  - Sanitasi setiap field data menggunakan DOMpurify sebelum ditampilkan pada halaman utama
+    ```
+    const name = DOMPurify.sanitize(product.fields.name);
+    const description = DOMPurify.sanitize(product.fields.description);
+    ```
+</details>
