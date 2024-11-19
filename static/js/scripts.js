@@ -95,3 +95,9 @@ document.getElementById("productEntryForm").addEventListener("submit", (e) => {
     e.preventDefault();
     addProductEntry();
 })
+
+function getitem() {
+    fetch("/json/").then(response => {
+        console.log(response.status)
+    })
+}
